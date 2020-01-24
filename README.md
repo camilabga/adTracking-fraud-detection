@@ -11,12 +11,7 @@ Nowadays, fraud traffic is one of the most pressing matters coupled with the exp
 
 Fraud risk is everywhere, but for companies that advertise online, click fraud can happen at an overwhelming volume, resulting in misleading click data and wasted money. Ad channels can drive up costs by simply clicking on the ad at a large scale. With over 1 billion smart mobile devices in active use every month, China is the largest mobile market in the world and therefore suffers from huge volumes of fradulent traffic.
 
-<div style="align: center; text-align: center;">
-![fraud rate 2017](imgs/fraud_rate_graph.png)
-<p>
-_Source: [DataVisor](https://www.datavisor.com/)_
-</p>
-</div>
+![Fraud Rate 2017](/imgs/fraud_rate_graph.png)
 
 It is shown that fraudulent apps led to at least 15% of the total amount of apps downloaded and installed on smartphones in 2017. In 2016, $5.7 billion dollars were spent on mobile advertising in the US alone; these numbers tell us that fraudsters are making away with hundreds of millions from developers and businesses each year. Clearly, mobile frauds are a severe financial burden and a serious threat to the mobile industry.
 
@@ -60,3 +55,4 @@ The sheer size of the given data (over 180 million rows of data, ~7.3GB) will no
 ### References
 - https://www.kaggle.com/c/talkingdata-adtracking-fraud-detection/overview
 - https://www.talkingdata.com/
+- https://www.datavisor.com/
