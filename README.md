@@ -59,3 +59,4 @@ The sheer size of the given data (over 180 million rows of data, ~7.3GB) will no
 
 ### References
 - https://www.kaggle.com/c/talkingdata-adtracking-fraud-detection/overview
+- https://www.talkingdata.com/
