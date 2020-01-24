@@ -37,7 +37,7 @@ A model in this competition is graded based on the area-under-the-ROC-curve scor
 
 ### Project Design
 
-* **Programming language:** Python 3.6
+* **Programming language:** Python 3.7.5
 * **Library:** Pandas, Numpy, Scikit-learn, XGBoost
 * **Workflow:**
   * Establish basic statistics and understanding of the dataset; perform basic cleaning and processing if needed.
