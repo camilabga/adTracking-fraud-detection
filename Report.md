@@ -87,12 +87,6 @@ For each given feature, how many unique values does it have?
 
 While it makes sense for the number of unique devices and oses to be so low as there are only so many phone models and OSes, and same goes for app and channel, it is quite interesting to see only about 40,000 IP addresses are responsible for 10,000,000 ad clicks in less than a day! That means on average an IP address has about 250 ad clicks in a few hours! Clearly some IP have abnormally too many clicks, possibly click factories fraudsters.
 
-This graph shows some IPs with the most number of empty clicks (positive):
-
-<center>
-![eda ip fraud clicks](assets/eda_ip_fraud_clicks.png)
-</center>
-
 ### Algorithms and Techniques
 
 **Extreme Gradient Boosting (XGBoost)** is an implementation of the gradient boosting machines that is highly flexible and versatile while being scalable and fast. XGBoost works with most regression, classification, and ranking problems as well as other objective functions; the framework also gained its popularity in recent years because of its compatibility with most platforms and distributed solutions like Amazon AWS, Apache Hadoop, Spark among others.
