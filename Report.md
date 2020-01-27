@@ -77,17 +77,13 @@ The dataset provided by Talking Data on [Kaggle competition homepage](https://ww
 
 The plot below shows how skewed the target concept is in the first 10 million rows of the training set:
 
-<center>
 ![eda target distribution](assets/eda_target.png)
-</center>
 
 Clearly, this needs to be taken into consideration later when the classification model is chosen.
 
 For each given feature, how many unique values does it have?
 
-<center>
 ![eda unique values](assets/eda_uniques_per_feature.png)
-</center>
 
 While it makes sense for the number of unique devices and oses to be so low as there are only so many phone models and OSes, and same goes for app and channel, it is quite interesting to see only about 40,000 IP addresses are responsible for 10,000,000 ad clicks in less than a day! That means on average an IP address has about 250 ad clicks in a few hours! Clearly some IP have abnormally too many clicks, possibly click factories fraudsters.
 
