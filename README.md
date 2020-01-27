@@ -2,7 +2,7 @@
 ## Capstone Proposal
 ## TalkingData AdTracking Fraud Detection Challenge
 Camila Barbosa  
-January 24st, 2020
+January 27st, 2020
 
 ## Get the dataset
 
