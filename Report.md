@@ -17,7 +17,7 @@ In this project, I trained and tested a binary classifier capable of predicting 
 
 In their [Kaggle competition](https://www.kaggle.com/c/talkingdata-adtracking-fraud-detection), Talking Data provided a dataset detailing the clicks registered by their system; the goal is to build a binary classification model that predicts whether an user will download an app after clicking a mobile app or not. This model would help the firm increase their solution's accuracy in identifying fraudsters.
 
-To solve this problem, firstly I attained some basic understanding of the training data that was provided to check for characteristics such as target concept balance and distribution of features; I also devised certain new features based on the given features that I thought would be important in learning the target concept. Then, I used a classification model based on the gradient boosting method (discussed in **Analysis > Algorithms and Techniques** below) that is fitted with the training data with all attributes to see how it performs to set a baseline expectation for my final model. At this point, having seen the technical difficulties with the engineered feature and training process, I made certain changes to improve the process, decided to reduce the amount of data used, and performed parameter tuning for the classification model (Methodology > Refinement). Lastly, I tested the final model design using its performance on the given testing data.
+To start understanding this problem, I tried, at first to understand the training data, checking for characteristics such as target concept balance and distribution of features; also tried feature engineering with some aspects that I thought to be important. Then, I implemented a classification model based on the gradient boosting method (discussed in **Analysis > Algorithms and Techniques** below) that is fitted with the training data with all attributes to see how it performs to set a baseline expectation for my final model. At this point, having seen the technical difficulties with the engineered feature and training process, I made certain changes to improve the process, decided to reduce the amount of data used, and performed parameter tuning for the classification model (Methodology > Refinement). At last, I tested the final model design using its performance on the given testing data.
 
 ### Metrics
 
@@ -33,16 +33,9 @@ Following [Kaggle's competition metrics](https://www.kaggle.com/c/talkingdata-ad
 
 Using the ROC-AUC metric, we can see the closeness between the model's prediction on the testing set and that of the solution, showing how accurate the model is in terms of classification probability. Furthermore, ROC-AUC can tell how good the classifier is at separating the positive and negative. While , ROC-AUC is a quick and intuitive way of assessing the model's performance compared to the solution.
 
-In my opinion, another reason why ROC-AUC was chosen to measure classifier performance in this competition instead of for example simple accuracy metric, is because of its sensitivity towards True Positive and False Positive. For a company like TalkingData whose job is to block any fraudulent mobile activity, being able to detect fake advertisement clicks by fraudsters is essential; however, it would also be devastating to wrongly identify a normal mobile user to be a fraudster. Moreover, as the data is greatly imbalanced (as shown in Analysis > Exploratory Visualization), it would be relatively easy for any model to attain a high accuracy score. For TalkingData, any false classification would imply severe consequences, hence a simple accuracy score is not enough to qualify a classification model in this competition.
-
 ## II. Analysis
 
 ### Data Exploration
-<!-- In this section, you will be expected to analyze the data you are using for the problem. This data can either be in the form of a dataset (or datasets), input data (or input files), or even an environment. The type of data should be thoroughly described and, if possible, have basic statistics and information presented (such as discussion of input features or defining characteristics about the input or environment). Any abnormalities or interesting qualities about the data that may need to be addressed have been identified (such as features that need to be transformed or the possibility of outliers). Questions to ask yourself when writing this section:
-- _If a dataset is present for this problem, have you thoroughly discussed certain features about the dataset? Has a data sample been provided to the reader?_
-- _If a dataset is present for this problem, are statistics about the dataset calculated and reported? Have any relevant results from this calculation been discussed?_
-- _If a dataset is **not** present for this problem, has discussion been made about the input space or input data for your problem?_
-- _Are there any abnormalities or characteristics about the input space or dataset that need to be addressed? (categorical variables, missing values, outliers, etc.)_ -->
 
 The dataset provided by Talking Data on [Kaggle competition homepage](https://www.kaggle.com/c/talkingdata-adtracking-fraud-detection) includes approximately 200 million registered clicks over 4 days, split into training and testing sets. The training set contains more than 180 million rows of data, each has the timestamp of the click, number-encoded IP addresses, device numbered label code, device's operating system code, app code, channel code, whether the click resulted in a download or not, and time of download if applicable. The testing set contains about 18 million clicks with each click associated with an ID and other information excluding the download or not label and download time.
 
@@ -122,15 +115,10 @@ There is a number of advantages in using XGBoost over other classification metho
 * **Optimization for both speed and performance:** XGBoost provides options to reduce computation time while keeping model accuracy using parallelization with multi-core CPU, cache optimization, and GPU mode that makes use of the graphics unit for tree training.
 
 ### Benchmark
-<!-- In this section, you will need to provide a clearly defined benchmark result or threshold for comparing across performances obtained by your solution. The reasoning behind the benchmark (in the case where it is not an established result) should be discussed. Questions to ask yourself when writing this section:
-- _Has some result or value been provided that acts as a benchmark for measuring performance?_
-- _Is it clear how this result or value was obtained (whether by data or by hypothesis)?_ -->
 
 A benchmark for this problem is a classifying model that randomly guess whether or not a registered click on an advertisement would result in a download of the advertised app. The guessed probability is either 0 or 1. On the testing dataset, the model scored 0.3893 of the ROC-AUC metrics measuring the closeness of the resulted probability graph versus that of the solution.
 
 ## III. Methodology
-<!-- _(approx. 3-5 pages)_ -->
-
 ### Data Preprocessing
 
 As previously mentioned, the given dataset had already been well-prepared and processed, all categorical features had been labelled and set to numbers, sensitive data encoded, and potentially missing data had been either filled or discarded.
@@ -221,14 +209,7 @@ After doing some research, I found out how to train an XGBoost model incremental
 
 Incremental training helped avoiding the need to have the whole training data loaded on the memory, allowing the model to have more computational resources and also made the training possible since the model can avoid memory error with smaller data. However, this also means the model is continuously trained with different data each time; without the whole data being available at all time, the tree construction is less ideal since it is impossible to choose upon optimal splits, as discussed [here](https://github.com/dmlc/xgboost/issues/3055#issuecomment-359505122).
 
-#### GPU mode
-
-Apart from incremental training, XGBoost also allows utilizing GPU resources for better computation time. Using a NVIDIA's GeForce GTX 1070 with 8GB VRAM, and the same sample dataset of 100,000 rows with same hyperparameters, I saw training time reduced by almost 75%.
-
-However, setting up GPU support for XGBoost on a Windows system turned out to be very time-consuming due to a bug in drivers that delayed the installation and another bug in XGBoost GPU mode itself that crashed the kernel during incremental training.
-
 ## IV. Results
-
 ### Model Evaluation and Validation
 
 Even though I managed to bypass the system memory limit on XGBoost by training the model incrementally, it still remains that Pandas is unable to produce the engineered feature `time_to_next_click` on the whole dataset. Therefore, I decided to again train the model on just a subset of the data. After some trials and errors, I found that 60,000,000 was the limit to which Pandas managed to generate `time_to_next_click` without memory error.
@@ -291,9 +272,9 @@ Therefore, my problem solution not just includes data processing and training bu
 
 I encountered many difficulties at different steps of the projects.
 
-Firstly, as mentioned earlier, I could not produce one of the new features I needed for the whole dataset due to not having enough system memory; in the end I decided to settle with using just a portion of the given data instead.
+At first, I couldn't generate one of the new features I needed for the whole dataset due to not having enough system memory; in the end I decided to settle with using just a portion of the given data instead.
 
-Secondly, again due to low memory problem, the classification model I used was not able to take in the whole dataset to train. This costed me a couple of days to look into until I found the way to implement incremental training for XGBoost classifier.
+Second, again due to low memory problem, the classification model I used was not able to take in the whole dataset to train. This costed me a couple of days to look into until I found the way to implement incremental training for XGBoost classifier.
 
 Thirdly, after managing to get the training in place, I realized still it took a relatively long time for the model to train even with just a fraction of data. While this is acceptable for the training process, it made the hyperparameter tuning step impossible, as I used `Grid Search` to perform brute force method to find the optimal parameters with thousands of combinations in the search space; the long training time for each instance meant it would take days to run! Luckily, I found that XGBoost supported training using GPU which greatly decreased training time, so I decided to rebuild XGBoost with GPU mode. Unfortunately, the rebuild process turned out to be the most frustrating part of the project, as I was met with various software compatibility issues on Windows environment; Visual Studio refused to work with XGBoost build when specified with certain versions of CUDA (computing driver for GPU) included. It's only after 3 days with dozens of trials and errors with different software versions that I finally got XGBoost with GPU mode up and running; training time immediately reduced by 4 times!
 
@@ -320,15 +301,3 @@ My intuition is to follow the clicking patterns of individual users, and the tim
 Aside from time features, app-based and channel-based features may hold important information, since intuitively a fraudster often target a single app or advertisement to generate fake clicks, and often operates exclusively in certain app distributing channels since some channels do not have strict regulation against mobile frauds.
 
 Similar to the time features, `app` and `channel` can be associated with individual users or "clicking sessions" by aggregating them with different groups of given identity features: [`ip`, `device`, `os`]. Upon successfully generating these new features, I would gauge their importance similar to what I did in the previous section and include the 2 most important ones for the final model training.
-
------------
-
-<!-- **Before submitting, ask yourself. . .**
-
-- Does the project report you’ve written follow a well-organized structure similar to that of the project template?
-- Is each section (particularly **Analysis** and **Methodology**) written in a clear, concise and specific fashion? Are there any ambiguous terms or phrases that need clarification?
-- Would the intended audience of your project be able to understand your analysis, methods, and results?
-- Have you properly proof-read your project report to assure there are minimal grammatical and spelling mistakes?
-- Are all the resources used for this project correctly cited and referenced?
-- Is the code that implements your solution easily readable and properly commented?
-- Does the code execute without error and produce results similar to those reported? -->
