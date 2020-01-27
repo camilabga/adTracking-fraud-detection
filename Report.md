@@ -225,9 +225,7 @@ To get a glimpse, I constructed more `time_to_next_click` features, this time us
 
 Again due to hardware limitation, I was only able to construct the new `time_to_next_click` features with 10,000,000 rows of the training data. I then fitted the data with an XGBoost classifier and used the `plot_importance` feature of XGBoost to see how much each feature has an impact on predicting the outcome of a click. The graph of feature importance is given below:
 
-<center>
 ![feature importance](assets/feature_importance.png)
-</center>
 
 As can be seen, among the 7 newly constructed `time_to_next_click` features, groupings of [`ip`, `app`] and [`ip`, `os`, `device`, `app`] were the most impactful. This aligned with my above assertion that for some cases, [`ip`, `app`] is the best way to identify a fraudster's "clicking session"; [`ip`, `os`, `device`, `app`] on the other hand shows that a fake click can still be identified with more specific user information aside from just their IP address; perhaps these are cases where fraudsters use mostly similar devices because they were cheap?
 
